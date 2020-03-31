@@ -1,6 +1,4 @@
-#compdef ssh slogin=ssh scp ssh-add ssh-agent ssh-copy-id ssh-keygen ssh-keyscan sftp
-
-# TODO: sshd, ssh-keysign
+#compdef ssh scp sftp
 
 _sshwr () {
   local curcontext="$curcontext" state line expl suf ret=1
@@ -669,4 +667,4 @@ _ssh_users () {
   _combination -s '[:@]' my-accounts users-hosts users "$@"
 }
 
-_ssh "$@"
+_sshwr "$@"
