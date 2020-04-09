@@ -14,19 +14,12 @@ fi
 if (( ind = ${words[(I)-F]} )); then
   config=${~words[ind+1]} 2>/dev/null
 else
-  config="$HOME/.ssh/config"
+  config="$HOME/.ssh/config_hosts"
 fi
 if [[ -r $config ]]; then
   local key hosts host
-  while IFS=$'=\t ' read -r key hosts; do
-    if [[ "$key" == (#i)host ]]; then
-       for host in ${(z)hosts}; do
-          case $host in
-          (*[*?]*) ;;
-          (*) config_hosts+=("$host") ;;
-          esac
-       done
-    fi
+  while read -r host; do
+    config_hosts+=("$host")
   done < "$config"
   if (( ${#config_hosts} )); then
     _wanted hosts expl 'remote host name' \
