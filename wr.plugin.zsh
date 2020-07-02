@@ -5,7 +5,7 @@ export HISTFILESIZE=50000
 # WORDCHARS
 #export WORDCHARS='-*?_[]~=&;!#$%^(){}'
 # editor
-export EDITOR='vim'
+export EDITOR='code'
 # pager
 #export PAGER='bat'
 # use vim as man pager
@@ -24,11 +24,13 @@ export GO111MODULE=on # Enable the go modules feature
 export GOPROXY=https://goproxy.cn #Set the GOPROXY environment variable
 
 # java
-#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk8u212-b03/Contents/Home
-export PATH=$JAVA_HOME/bin:$PATH 
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
-export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-1.0.0-rc14/Contents/Home
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home/
+#export PATH=$JAVA_HOME/bin:$PATH 
+#export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
+#export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-1.0.0-rc14/Contents/Home
+
+# Maven
+export PATH=/usr/local/apache-maven-3.6.3/bin/:$PATH
 
 export PATH=$PATH:/Users/Real/Documents/Note/scripts/
 export PATH=$PATH:/usr/local/sbin
@@ -36,6 +38,9 @@ export PATH=$PATH:/usr/local/opt/mysql-client/bin
 export PATH=$PATH:$HOME/.yarn/bin
 export PATH=$PATH:$HOME/.config/yarn/global/node_modules/.bin
 export PATH=$PATH:/Applications/instantclient_18_1
+
+# Python
+export PATH=/Users/Real/Library/Python/3.7/bin:$PATH
 # }}}
 # Alias {{{1
 alias z='_zlua -I'
@@ -45,34 +50,35 @@ alias tr='tmux -u attach'
 alias ....='cd ../../..'
 alias ...='cd ../..'
 alias ..='cd ..'
-#alias pd='pushd'
-#alias d='dirs -v'
 alias s='sshrc'
 alias r='open -R'
 alias vim='nvim'
+alias vi='nvim -u /dev/null'
+alias o='openfile'
+alias secp='copy_remote_screen_message_content_to_local_clipboard'
 # }}}
 # Functions {{{1
 
-favorite.docs(){
+copy_remote_screen_exchange_content_to_local_clipboard(){ # {{{2
+    ssh $1 cat /tmp/screen-exchange | pbcopy
+}
+# }}}
+favorite.docs(){ # {{{2
     abs_path=`greadlink -f $1`
     cd ~/Documents/vim-workspace/docs/ && ln -s $abs_path ./$2
 }
-
-o(){ # {{{2
+# }}}
+openfile(){ # {{{2
 
     file=$1
     mime_type="${$(file --mime-type $file | awk '{print $2}')%/*}"
 
     if [[ $mime_type = 'text' ]]; then
-        vim $file
+        #vim $file
+        $EDITOR $file
     else
         open $file
     fi
-}
-# }}}
-c(){ # {{{2
-    cd $1
-    ls
 }
 # }}}
 vs(){ # {{{2
@@ -82,20 +88,6 @@ vs(){ # {{{2
         -c "Edit /root/" \
         -c "new" -c "ServerUpdateInfo"
     sshrc $1
-}
-# }}}
-lf(){ #{{{2
-    tmp="$(mktemp)"
-    ~/go/bin/lf --last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
 }
 # }}}
 vpn.route.add.zkzy() { # {{{2
@@ -115,8 +107,8 @@ safari.agent.default() { # {{{2
 }
 # }}}
 proxy.ss.active(){ # {{{2
-    export http_proxy="http://127.0.0.1:1080"
-    export https_proxy="http://127.0.0.1:1080"
+    export http_proxy="http://127.0.0.1:1087"
+    export https_proxy="http://127.0.0.1:1087"
 }
 # }}}
 proxy.ss.deactive(){ # {{{2
