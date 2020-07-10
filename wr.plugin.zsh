@@ -5,7 +5,7 @@ export HISTFILESIZE=50000
 # WORDCHARS
 #export WORDCHARS='-*?_[]~=&;!#$%^(){}'
 # editor
-export EDITOR='code'
+export EDITOR='vim'
 # pager
 #export PAGER='bat'
 # use vim as man pager
@@ -75,7 +75,7 @@ openfile(){ # {{{2
 
     if [[ $mime_type = 'text' ]]; then
         #vim $file
-        $EDITOR $file
+        code $file
     else
         open $file
     fi
@@ -116,21 +116,6 @@ proxy.ss.deactive(){ # {{{2
     export https_proxy=""
 }
 # }}}
-update.all() { # {{{2
-
-    echo "-------- update antigen--------"
-    antigen update
-
-    echo "-------- update tmux--------"
-    /Users/Real/.tmux/plugins/tpm/bin/update_plugins all
-
-    echo "-------- update homebrew--------"
-    brew upgrade
-    brew cleanup
-
-    echo "-------- update Coc--------"
-    vim -c 'PlugUpdate | CocUpdateSync | qall'
-}
 # }}}
 oracle.env.gb2312(){ # {{{2
 	echo export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK
