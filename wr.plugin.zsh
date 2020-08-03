@@ -3,7 +3,7 @@
 export HISTSIZE=5000
 export HISTFILESIZE=50000
 # WORDCHARS
-#export WORDCHARS='-*?_[]~=&;!#$%^(){}'
+export WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 # editor
 export EDITOR='vim'
 # pager
@@ -52,10 +52,11 @@ alias ...='cd ../..'
 alias ..='cd ..'
 alias s='sshrc'
 alias r='open -R'
-alias vim='nvim'
-alias vi='nvim -u /dev/null'
 alias o='openfile'
+alias o.serverlist='open ~/Documents/zkzy/Implementation-doc/中科智云内部环境说明/虚拟机和宿主机分布情况说明.xlsx'
+alias o.dblist='open ~/Documents/zkzy/Implementation-doc/中科智云内部环境说明/database_info.xlsx'
 alias secp='copy_remote_screen_message_content_to_local_clipboard'
+alias vim='nvim'
 # }}}
 # Functions {{{1
 
@@ -148,7 +149,11 @@ color.print.tput(){ #{{{2
 }
 alias telnet='nc -vz -w 1'
 #}}}
-ssh.excute_local_script() { # {{{2
+ssh.execute_local_script() { # {{{2
+    if [[ $1 == "" ]]; then
+        echo "$0 host script"
+        return 1
+    fi
     h=$1
     s=$2
     cat $2 | ssh -T $1
