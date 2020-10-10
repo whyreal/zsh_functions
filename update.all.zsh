@@ -13,9 +13,9 @@ antigen update
 echo "-------- update tmux--------"
 /Users/Real/.tmux/plugins/tpm/bin/update_plugins all
 
-echo "-------- update homebrew--------"
-# brew upgrade
-# brew cleanup
+#echo "-------- update homebrew--------"
+#brew upgrade
+#brew cleanup
 
 echo "-------- update Coc--------"
 nvim -c 'PlugUpdate | CocUpdateSync | qall'

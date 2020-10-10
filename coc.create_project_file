@@ -6,4 +6,6 @@ if not os.path.isdir(".vim"):
     os.mkdir(".vim")
 
 if not os.path.isfile(".vim/workspace"):
-    os.mknod(".vim/workspace")
+    ws = open(".vim/workspace", "w")
+    ws.close()
+    # os.mknod(".vim/workspace")
