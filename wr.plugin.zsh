@@ -39,6 +39,9 @@ export PATH=$PATH:$HOME/.yarn/bin
 export PATH=$PATH:$HOME/.config/yarn/global/node_modules/.bin
 export PATH=$PATH:/Applications/instantclient_18_1
 
+# oracle
+export NLS_LANG=AMERICAN_AMERICA.UTF8
+
 # neovim
 export PATH=/usr/local/nvim-osx64/bin/:$PATH
 
@@ -80,6 +83,7 @@ alias mysqldump8='command mysqldump'
 alias tl='python3 ~/code/translator/translator.py'
 alias ldd='otool -L'
 alias secp='copy_remote_screen_message_content_to_local_clipboard'
+alias sqlplus='rlwrap sqlplus'
 
 # }}}
 # Functions {{{1
