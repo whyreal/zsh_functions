@@ -45,10 +45,8 @@ export NLS_LANG=AMERICAN_AMERICA.UTF8
 # neovim
 export PATH=/usr/local/nvim-osx64/bin/:$PATH
 
-# Python
-#export PATH=/Users/Real/Library/Python/3.7/bin:$PATH
-
 # fzf
+export FZF_DEFAULT_OPTS="--extended --cycle --history=$HOME/.fzf.history"
 export FZF_DEFAULT_COMMAND='fd -i -I -L --type f'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
@@ -58,6 +56,7 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 alias awk='gawk'
 alias sed='gsed'
 alias r='open -R'
+alias e='open -e'
 #alias o='openfile'
 alias o='open'
 alias o.serverlist='open ~/Documents/zkzy/Implementation-doc/中科智云内部环境说明/虚拟机和宿主机分布情况说明.xlsx'
