@@ -16,6 +16,3 @@ echo "-------- update tmux--------"
 #echo "-------- update homebrew--------"
 #brew upgrade
 #brew cleanup
-
-echo "-------- update Coc--------"
-nvim -c 'PlugUpdate | CocUpdateSync | qall'

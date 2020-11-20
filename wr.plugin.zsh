@@ -29,9 +29,6 @@ export GOPROXY=https://goproxy.cn #Set the GOPROXY environment variable
 #export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 #export GRAALVM_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-1.0.0-rc14/Contents/Home
 
-# Maven
-export PATH=/usr/local/apache-maven-3.6.3/bin/:$PATH
-
 export PATH=$PATH:$HOME/Documents/Note/scripts/
 export PATH=$PATH:/usr/local/sbin
 export PATH=$PATH:/usr/local/opt/mysql-client/bin
@@ -42,13 +39,19 @@ export PATH=$PATH:/Applications/instantclient_18_1
 # oracle
 export NLS_LANG=AMERICAN_AMERICA.UTF8
 
-# neovim
-export PATH=/usr/local/nvim-osx64/bin/:$PATH
-
 # fzf
-export FZF_DEFAULT_OPTS="--extended --cycle --history=$HOME/.fzf.history"
+export FZF_DEFAULT_OPTS="--extended --cycle"
 export FZF_DEFAULT_COMMAND='fd -i -I -L --type f'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+
+# lua
+export LUA_PATH="./?.lua;./?/init.lua;/usr/local/luarocks/share/lua/5.1/?.lua;/usr/local/luarocks/share/lua/5.1/?/init.lua"
+export LUA_CPATH='./?.so;/usr/local/luarocks/share/lua/5.1/?.so'
+
+# neovim
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+alias vim='nvim'
+alias docs='cd ~/Documents/vim-workspace/docs && $EDITOR'
 
 # }}}
 # Alias {{{1
@@ -61,7 +64,6 @@ alias e='open -e'
 alias o='open'
 alias o.serverlist='open ~/Documents/zkzy/Implementation-doc/中科智云内部环境说明/虚拟机和宿主机分布情况说明.xlsx'
 alias o.dblist='open ~/Documents/zkzy/Implementation-doc/中科智云内部环境说明/database_info.xlsx'
-alias o.docs='cd ~/Documents/vim-workspace/docs/ && vim'
 alias drawio='open -a draw.io.app'
 
 alias ....='cd ../../..'
@@ -74,7 +76,6 @@ alias grep='grep --color'
 #alias tr='tmux -u attach'
 alias s='sshrc'
 alias ssh-with-password='ssh -F /dev/null -o "PreferredAuthentications=keyboard-interactive,password"'
-alias vim='nvim'
 alias mysql='mysql --default-auth=mysql_native_password'
 alias mysql8='command mysql'
 alias mysqldump='mysqldump --column-statistics=0'
@@ -86,26 +87,10 @@ alias sqlplus='rlwrap sqlplus'
 
 # }}}
 # Functions {{{1
-#openfile() {
-     #file=$1
-     #long_ext=`echo $file | awk -F\. '{print $(NF-1)"."$NF}'`
-     #mime_type="${$(file --mime-type $file | awk '{print $2}')%/*}"
-
-     #if [[ $mime_type = 'text' ]]; then
-         ##vim $file
-         #code $file
-     #else
-         #open $file
-     #fi
-#}
 copy_remote_screen_exchange_content_to_local_clipboard(){ # {{{2
     ssh $1 cat /tmp/screen-exchange | pbcopy
 }
 # }}}
-favorite.docs(){ # {{{2
-    abs_path=`greadlink -f $1`
-    cd ~/Documents/vim-workspace/docs/ && ln -s $abs_path ./$2
-}
 # }}}
 vs(){ # {{{2
     mvim -n \
